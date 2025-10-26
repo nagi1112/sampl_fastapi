@@ -5,6 +5,7 @@ import socket
 
 app = FastAPI(title="demo-app")
 
+
 @app.get("/health")
 def health():
     return JSONResponse({"status": "ok"})
