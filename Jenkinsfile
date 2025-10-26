@@ -1,4 +1,4 @@
-﻿pipeline {
+pipeline {
   agent any
   environment {
     IMAGE_NAME = 'demo-fastapi'
