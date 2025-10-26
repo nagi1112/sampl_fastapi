@@ -1,0 +1,26 @@
+﻿pipeline {
+  agent any
+  environment {
+    IMAGE_NAME = 'demo-fastapi'
+    IMAGE_TAG  = "v\"
+    DOCKERHUB_REPO = ''
+  }
+  stages {
+    stage('Checkout') { steps { checkout scm } }
+    stage('Build')    { steps { sh 'docker build -t \:\ .' } }
+    stage('Test')     { steps { sh 'docker run --rm \:\ python -c "print(\"ok\")"' } }
+    stage('Push') {
+      when { expression { return env.DOCKERHUB_REPO?.trim() } }
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+          sh '''
+          echo "" | docker login -u "" --password-stdin
+          docker tag : :
+          docker push :
+          '''
+        }
+      }
+    }
+  }
+  post { success { echo "Built \:\" } }
+}
