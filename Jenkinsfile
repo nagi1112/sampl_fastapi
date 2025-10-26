@@ -22,7 +22,7 @@
       }
     }
     stage('Push') {
-      when { expression { return env.DOCKERHUB_REPO?.trim() } } // сработает, только если задан репо
+      when { expression { return env.DOCKERHUB_REPO?.trim() } }
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
           sh '''
