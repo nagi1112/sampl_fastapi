@@ -3,7 +3,7 @@ pipeline {
   environment {
     IMAGE_NAME = 'demo-fastapi'
     IMAGE_TAG  = "v${env.BUILD_NUMBER}"
-    DOCKERHUB_REPO = 'nagi1112/dsampl_fastapi'
+    DOCKERHUB_REPO = 'nagi1112/sampl_fastapi'
   }
   stages {
     stage('Checkout') {
